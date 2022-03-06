@@ -1,0 +1,10 @@
+# Useful libraries
+from pdf2image import convert_from_path
+from pytesseract import image_to_string
+
+pip install tesseract
+pip install pytesseract
+pip install pdf2image
+
+#links documentation
+https://github.com/zoumdatascience/OCR/blob/main/TextFromAnyPDF.ipynb
