@@ -1,7 +1,8 @@
 # Useful libraries
 # [0]
 from pdf2image import convert_from_path
-from pytesseract import image_to_string
+import pytesseract
+import cv2
 
 # [1]
 
@@ -16,6 +17,7 @@ def convert_pdf_to_img(pdf_file):
     @returns:
         - an interable containing image format of all the pages of the PDF
     """
+
     return convert_from_path(pdf_file)
 
 
@@ -30,8 +32,10 @@ def convert_image_to_text(file):
         - the textual content of single image
     """
 
-    text = image_to_string(file)
-    return text
+    #text = pytesseract.image_to_string('data/1.png')
+    img = cv2.imread('data/1.png')
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img
 
 
 def get_text_from_any_pdf(pdf_file):
@@ -56,7 +60,7 @@ def get_text_from_any_pdf(pdf_file):
 
 
 # [4]
-path_to_pdf = 'data/#.pdf'
+path_to_pdf = 'data/pdf/pdf.pdf'
 
 # [5]
-print(get_text_from_any_pdf(path_to_pdf))
+print(convert_image_to_text(path_to_pdf))

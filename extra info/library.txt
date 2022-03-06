@@ -5,6 +5,7 @@ from pytesseract import image_to_string
 pip install tesseract
 pip install pytesseract
 pip install pdf2image
+pip install opencv-python
 
 #links documentation
 https://github.com/zoumdatascience/OCR/blob/main/TextFromAnyPDF.ipynb
