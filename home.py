@@ -1,3 +1,4 @@
+from tkinter import END, N
 from pdf2image import convert_from_path
 import pytesseract as tess
 import cv2
@@ -22,6 +23,10 @@ def test(img):
         # print(b)
         b = b.split(' ')
         # print(b)
+        if b == b:
+            outfile = open('test.txt', 'a')
+            outfile.write(str(b[0] + "\n"))
+
         x, y, w, h = int(b[1]), int(b[2]), int(b[3]), int(b[4])
         cv2.rectangle(img, (x, hImg-y), (w, hImg-h), (0, 0, 255), 2)
         cv2.putText(img, b[0], (x, hImg-y+25),
@@ -39,11 +44,12 @@ def detecting_words(img):
     for x, b in enumerate(boxes.splitlines()):
         if x != 0:
             b = b.split()
-            print(b)
+           # print(b)
             if len(b) == 12:
                 x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
                 cv2.rectangle(img, (x, y), (w+x, h+y), (0, 0, 255), 2)
     cv2.imshow('Result', img)
     cv2.waitKey(0)
 
-detecting_words(img)
+
+test(img)
