@@ -6,6 +6,7 @@ pip install tesseract
 pip install pytesseract
 pip install pdf2image
 pip install opencv-python
+pip install pillow
 
 #links documentation
 https://github.com/zoumdatascience/OCR/blob/main/TextFromAnyPDF.ipynb
