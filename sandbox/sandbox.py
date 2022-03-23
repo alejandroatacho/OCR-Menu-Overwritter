@@ -1,66 +1,20 @@
-# Useful libraries
-# [0]
-from pdf2image import convert_from_path
-import pytesseract
 import cv2
+from PIL import Image
+import pytesseract
+from pdf2image import convert_from_path
 
-# [1]
-
-
-def convert_pdf_to_img(pdf_file):
-    """
-    @desc: this function converts a PDF into Image
-
-    @params:
-        - pdf_file: the file to be converted
-
-    @returns:
-        - an interable containing image format of all the pages of the PDF
-    """
-
-    return convert_from_path(pdf_file)
+# converts PDF to PNG
 
 
-def convert_image_to_text(file):
-    """
-    @desc: this function extracts text from image
+def convert_pdf(pdf_path, save_dir, res=400):
+    pages = convert_from_path(pdf_path, res)
 
-    @params:
-        - file: the image file to extract the content
+    name_with_extension = pdf_path.rsplit('/')[-1]
+    name = name_with_extension.rsplit('.')[0]
 
-    @returns:
-        - the textual content of single image
-    """
-
-    #text = pytesseract.image_to_string('data/1.png')
-    img = cv2.imread('data/1.png')
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    return img
+    for idx, page in enumerate(pages):
+        page.save(f'{save_dir}/{name}_{idx}.png', 'PNG')
 
 
-def get_text_from_any_pdf(pdf_file):
-    """
-    @desc: this function is our final system combining the previous functions
-
-    @params:
-        - file: the original PDF File
-
-    @returns:
-        - the textual content of ALL the pages
-    """
-    images = convert_pdf_to_img(pdf_file)
-    final_text = ""
-    for pg, img in enumerate(images):
-
-        final_text += convert_image_to_text(img)
-        #print("Page n°{}".format(pg))
-        # print(convert_image_to_text(img))
-
-    return final_text
-
-
-# [4]
-path_to_pdf = 'data/pdf/pdf.pdf'
-
-# [5]
-print(convert_image_to_text(path_to_pdf))
+convert_pdf(
+    'data/template1.pdf', 'temp')
